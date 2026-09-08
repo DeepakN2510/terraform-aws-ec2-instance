@@ -25,7 +25,7 @@ jobs:
           
           TOKEN=$(echo "$RESPONSE" | jq -r '.value')
 
-          python - "$TOKEN" << 'py'
+          python - "$TOKEN" << 'PY'
           import base64
           import json
           import sys
@@ -45,7 +45,7 @@ jobs:
               "repository_id": claims.get("repository_id"),
               "repository_owner_id": claims.get("repository_owner_id")
               }, indent=2))
-              py
+          PY
 
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6 
