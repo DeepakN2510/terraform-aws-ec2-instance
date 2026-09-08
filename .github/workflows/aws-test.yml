@@ -23,7 +23,7 @@ jobs:
           -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
           "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com")   
           
-          TOKEN=$(echo "$RESPONSE" | jp -r '.value')
+          TOKEN=$(echo "$RESPONSE" | jq -r '.value')
 
           python - "$TOKEN" << 'py'
           import base64
@@ -46,7 +46,7 @@ jobs:
               "repository_owner_id": claims.get("repository_owner_id")
               }, indent=2))
               py
-              
+
       - name: configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v6 
         with:
